@@ -2,7 +2,13 @@ import sys
 import requests
 from PyQt5 import QtWidgets as Qt
 import time
-from chat.thread import thread
+import threading
+
+def thread(my_func):
+    def wrapper(*args, **kwargs):
+        my_thread = threading.Thread(target=my_func, args=args, kwargs=kwargs)
+        my_thread.start()
+    return wrapper
 
 
 class Example(Qt.QWidget):
